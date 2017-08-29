@@ -5,6 +5,7 @@
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
     <string name="next_button">Next</string>
+    <string name="prev_button">Prev</string>
 
     <!--Questions -->
     <string name="question_australia">Canbera is the capital of Austaralia.</string>

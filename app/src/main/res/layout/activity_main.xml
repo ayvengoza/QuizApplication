@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/question_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp" />
 
@@ -35,9 +35,27 @@
             android:text="@string/false_button"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/next_button"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next_button"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/arrow_left"
+            android:text="@string/prev_button"
+            android:drawablePadding="4dp"/>
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="4dp"
+            android:text="@string/next_button"/>
+
+    </LinearLayout>
+
 </LinearLayout>
