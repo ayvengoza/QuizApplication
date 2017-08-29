@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mQuestuinTextView;
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
-    private Button mPrevButton;
+    private ImageButton mNextImageButton;
+    private ImageButton mPrevImageButton;
 
     private Question[] mQuestions = new Question[]{
             new Question(R.string.question_australia, true),
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         mQuestuinTextView = (TextView)findViewById(R.id.question_text_view);
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
-        mNextButton = (Button) findViewById(R.id.next_button);
-        mPrevButton = (Button) findViewById(R.id.prev_button);
+        mNextImageButton = (ImageButton) findViewById(R.id.next_image_button);
+        mPrevImageButton = (ImageButton) findViewById(R.id.prev_image_button);
 
         updateQuestion();
 
@@ -59,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        mNextImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateNextQuestion();
             }
         });
 
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
+        mPrevImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updatePrevQuestion();
