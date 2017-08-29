@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mPrevButton;
 
     private Question[] mQuestions = new Question[]{
             new Question(R.string.question_australia, true),
@@ -33,8 +34,16 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
         mNextButton = (Button) findViewById(R.id.next_button);
+        mPrevButton = (Button) findViewById(R.id.prev_button);
 
         updateQuestion();
+
+        mQuestuinTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateNextQuestion();
+            }
+        });
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +62,31 @@ public class MainActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateQuestion();
+                updateNextQuestion();
+            }
+        });
+
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePrevQuestion();
             }
         });
     }
 
-    private void updateQuestion(){
+    private void updateNextQuestion(){
         mCurrentIndex = (mCurrentIndex + 1) % mQuestions.length;
+        updateQuestion();
+
+    }
+
+    private void updatePrevQuestion(){
+        mCurrentIndex = (mCurrentIndex > 0) ? (mCurrentIndex - 1) % mQuestions.length :
+                mQuestions.length - 1;
+        updateQuestion();
+    }
+
+    private void updateQuestion(){
         int question = mQuestions[mCurrentIndex].getTextResId();
         mQuestuinTextView.setText(question);
     }
