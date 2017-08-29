@@ -44,13 +44,15 @@
             android:id="@+id/prev_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_left"/>
+            android:src="@mipmap/arrow_left"
+            android:contentDescription="@string/prev_image_button_desc"/>
 
         <ImageButton
             android:id="@+id/next_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_right"/>
+            android:src="@mipmap/arrow_right"
+            android:contentDescription="@string/next_image_button_desc"/>
 
     </LinearLayout>
 
