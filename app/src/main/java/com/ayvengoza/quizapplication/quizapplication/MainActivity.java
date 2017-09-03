@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
+    //Loging messages
     private static final String ON_CREATE = "onCreate(Bundle) called";
     private static final String ON_START = "onStart() called";
     private static final String ON_RESUME = "onResume() called";
@@ -18,12 +19,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String ON_RESTART = "onRestart() called";
     private static final String ON_STOP = "onStop() called";
     private static final String ON_DESTROY = "onDestroy() called";
+    private static final String SAVE_INSTANCE_STATE = "onSaveInstanceState";
+
+    //Saving keys
+    private static final String KEY_INDEX = "index";
 
     private TextView mQuestuinTextView;
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextImageButton;
-    private ImageButton mPrevImageButton;
+    private Button mNextButton;
+    private Button mPrevButton;
 
     private Question[] mQuestions = new Question[]{
             new Question(R.string.question_australia, true),
@@ -41,12 +46,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, ON_CREATE);
         setContentView(R.layout.activity_main);
 
+        if(savedInstanceState != null)
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+
         //Bind Views
         mQuestuinTextView = (TextView)findViewById(R.id.question_text_view);
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
-        mNextImageButton = (ImageButton) findViewById(R.id.next_image_button);
-        mPrevImageButton = (ImageButton) findViewById(R.id.prev_image_button);
+        mNextButton = (Button) findViewById(R.id.next_button);
+        mPrevButton = (Button) findViewById(R.id.prev_button);
 
         updateQuestion();
 
@@ -71,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mNextImageButton.setOnClickListener(new View.OnClickListener() {
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateNextQuestion();
             }
         });
 
-        mPrevImageButton.setOnClickListener(new View.OnClickListener() {
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updatePrevQuestion();
@@ -108,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         Log.d(TAG, ON_RESTART);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, SAVE_INSTANCE_STATE);
+        outState.putInt(KEY_INDEX, mCurrentIndex);
     }
 
     @Override

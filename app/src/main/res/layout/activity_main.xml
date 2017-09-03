@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/question_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp" />
 
@@ -40,18 +40,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/prev_image_button"
+        <Button
+            android:id="@+id/prev_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_left"
+            android:text="@string/prev_button"
+            android:drawableLeft="@mipmap/arrow_left"
+            android:drawablePadding="4dp"
             android:contentDescription="@string/prev_image_button_desc"/>
 
-        <ImageButton
-            android:id="@+id/next_image_button"
+        <Button
+            android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_right"
+            android:text="@string/next_button"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="4dp"
             android:contentDescription="@string/next_image_button_desc"/>
 
     </LinearLayout>
