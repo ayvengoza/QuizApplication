@@ -35,20 +35,20 @@
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:text="@string/next_button"
         android:contentDescription="@string/prev_image_button_desc"
-        android:drawableRight="@mipmap/arrow_right"
+        android:drawableEnd="@mipmap/arrow_right"
         android:drawablePadding="4dp"/>
 
     <Button
         android:id="@+id/prev_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="bottom|start"
         android:text="@string/prev_button"
         android:contentDescription="@string/prev_image_button_desc"
-        android:drawableLeft="@mipmap/arrow_left"
+        android:drawableStart="@mipmap/arrow_left"
         android:drawablePadding="4dp"/>
 
     <Button

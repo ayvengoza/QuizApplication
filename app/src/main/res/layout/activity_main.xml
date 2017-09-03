@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prev_button"
-            android:drawableLeft="@mipmap/arrow_left"
+            android:drawableStart="@mipmap/arrow_left"
             android:drawablePadding="4dp"
             android:contentDescription="@string/prev_image_button_desc"/>
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next_button"
-            android:drawableRight="@mipmap/arrow_right"
+            android:drawableEnd="@mipmap/arrow_right"
             android:drawablePadding="4dp"
             android:contentDescription="@string/next_image_button_desc"/>
 

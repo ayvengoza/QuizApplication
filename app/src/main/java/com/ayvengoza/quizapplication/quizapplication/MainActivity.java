@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
-    //Loging messages
+    //Logging messages
     private static final String ON_CREATE = "onCreate(Bundle) called";
     private static final String ON_START = "onStart() called";
     private static final String ON_RESUME = "onResume() called";
@@ -25,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_ANSWER_STATUS = "answerStatus";
     private static final String KEY_RESTART = "restart";
 
-    private TextView mQuestuinTextView;
+    private TextView mQuestionTextView;
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
     private Button mPrevButton;
     private Button mRestartButton;
 
-    private Question[] mQuestions = new Question[]{
+    private final Question[] mQuestions = new Question[]{
             new Question(R.string.question_australia, true),
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_mideast, false),
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Bind Views
-        mQuestuinTextView = (TextView)findViewById(R.id.question_text_view);
+        mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
         mNextButton = (Button) findViewById(R.id.next_button);
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         updateQuestion();
         setMode();
 
-        mQuestuinTextView.setOnClickListener(new View.OnClickListener() {
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateNextQuestion();
@@ -180,14 +180,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateQuestion(){
         int question = mQuestions[mCurrentIndex].getTextResId();
-        mQuestuinTextView.setText(question);
+        mQuestionTextView.setText(question);
         setEnabledAnswer();
     }
 
-    private void checkAnswer(boolean usetPressed){
+    private void checkAnswer(boolean userPressed){
         boolean answerTrue = mQuestions[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
-        if(usetPressed == answerTrue){
+        if(userPressed == answerTrue){
             messageResId = R.string.correct_toast;
             mAnswerStatus[mCurrentIndex] = CORRECT_ANSWER;
         } else {
