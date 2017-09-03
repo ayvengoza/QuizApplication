@@ -51,4 +51,13 @@
         android:drawableLeft="@mipmap/arrow_left"
         android:drawablePadding="4dp"/>
 
+    <Button
+        android:id="@+id/restart_quiz_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/restart_quiz_button"
+        android:layout_gravity="bottom|center"
+        android:visibility="invisible"
+        android:contentDescription="@string/restart_quiz_button_desc"/>
+
 </FrameLayout>
