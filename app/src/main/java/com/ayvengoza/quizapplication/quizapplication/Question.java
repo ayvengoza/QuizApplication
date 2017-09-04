@@ -1,9 +1,5 @@
 package com.ayvengoza.quizapplication.quizapplication;
 
-/**
- * Created by ang on 28.08.17.
- */
-
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;

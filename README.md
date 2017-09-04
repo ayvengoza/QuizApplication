@@ -1,2 +1,2 @@
 # QuizApplication
-Quiz Aplication
+Quiz Application
