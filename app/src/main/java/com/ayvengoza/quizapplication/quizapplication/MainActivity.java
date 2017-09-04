@@ -1,5 +1,6 @@
 package com.ayvengoza.quizapplication.quizapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mNextButton;
     private Button mPrevButton;
     private Button mRestartButton;
+    private Button mCheatButton;
 
     private final Question[] mQuestions = new Question[]{
             new Question(R.string.question_australia, true),
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mNextButton = (Button) findViewById(R.id.next_button);
         mPrevButton = (Button) findViewById(R.id.prev_button);
         mRestartButton = (Button) findViewById(R.id.restart_quiz_button);
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
 
         updateQuestion();
         setMode();
@@ -117,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentIndex = 0;
                 updateQuestion();
                 setMode();
+            }
+        });
+
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start CheatActivity
+                Intent intent = new Intent(MainActivity.this, CheatActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -226,12 +238,14 @@ public class MainActivity extends AppCompatActivity {
         mRestartButton.setVisibility(View.INVISIBLE);
         mNextButton.setVisibility(View.VISIBLE);
         mPrevButton.setVisibility(View.VISIBLE);
+        mCheatButton.setVisibility(View.VISIBLE);
     }
 
     private void runRestartMode(){
         mRestartButton.setVisibility(View.VISIBLE);
         mNextButton.setVisibility(View.INVISIBLE);
         mPrevButton.setVisibility(View.INVISIBLE);
+        mCheatButton.setVisibility(View.INVISIBLE);
     }
 
     private int getNumOfAnswers(int answerType){
