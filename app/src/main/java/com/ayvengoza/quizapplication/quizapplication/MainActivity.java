@@ -1,8 +1,9 @@
 package com.ayvengoza.quizapplication.quizapplication;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_ANSWER_STATUS = "answerStatus";
     private static final String KEY_RESTART = "restart";
+    private static final int REQUEST_CODE_CHEAT = 0;
 
     private TextView mQuestionTextView;
     private Button mTrueButton;
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentIndex;
     private int[] mAnswerStatus;
     private boolean mRestartModeOn;
+    private boolean mIsCheater;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mIsCheater = false;
                 updateNextQuestion();
             }
         });
@@ -127,8 +132,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start CheatActivity
-                Intent intent = new Intent(MainActivity.this, CheatActivity.class);
-                startActivity(intent);
+                boolean answerIsTrue = mQuestions[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(MainActivity.this, answerIsTrue);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
     }
@@ -178,6 +184,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, ON_DESTROY);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != Activity.RESULT_OK)
+            return;
+        if (requestCode == REQUEST_CODE_CHEAT){
+            if(data == null){
+                return;
+            }
+            mIsCheater = CheatActivity.wasAnswerShown(data);
+        }
+    }
+
     private void updateNextQuestion(){
         mCurrentIndex = (mCurrentIndex + 1) % mQuestions.length;
         updateQuestion();
@@ -199,12 +218,16 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressed){
         boolean answerTrue = mQuestions[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
-        if(userPressed == answerTrue){
-            messageResId = R.string.correct_toast;
-            mAnswerStatus[mCurrentIndex] = CORRECT_ANSWER;
+        if(mIsCheater){
+            messageResId = R.string.jugment_toast;
         } else {
-            messageResId = R.string.incorrect_toast;
-            mAnswerStatus[mCurrentIndex] = WRONG_ANSWER;
+            if (userPressed == answerTrue) {
+                messageResId = R.string.correct_toast;
+                mAnswerStatus[mCurrentIndex] = CORRECT_ANSWER;
+            } else {
+                messageResId = R.string.incorrect_toast;
+                mAnswerStatus[mCurrentIndex] = WRONG_ANSWER;
+            }
         }
         setEnabledAnswer();
 
