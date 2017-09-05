@@ -14,7 +14,10 @@ public class CheatActivity extends AppCompatActivity {
     private static final String EXTRA_ANSWER_SHOWN =
             "com.ayvengoza.quizapplication.quizapplication.answer_shown";
 
+    private static final String KEY_IS_SHOWN = "is_answer_shown";
+
     private boolean mAnswerIsTrue;
+    private boolean mIsAnswerShown;
 
     private TextView mAnswerTextView;
     private Button mShowAnswerButton;
@@ -23,6 +26,10 @@ public class CheatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
+
+        if(savedInstanceState != null){
+            mIsAnswerShown = savedInstanceState.getBoolean(KEY_IS_SHOWN);
+        }
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
@@ -37,14 +44,23 @@ public class CheatActivity extends AppCompatActivity {
                 } else {
                     mAnswerTextView.setText(R.string.false_button);
                 }
-                setAnswerShownResult(true);
+                mIsAnswerShown = true;
+                setAnswerShownResult();
             }
         });
+
+        setAnswerShownResult();
     }
 
-    private void setAnswerShownResult(boolean isAnswerShown){
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_IS_SHOWN, mIsAnswerShown);
+    }
+
+    private void setAnswerShownResult(){
         Intent data = new Intent();
-        data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
+        data.putExtra(EXTRA_ANSWER_SHOWN, mIsAnswerShown);
         setResult(RESULT_OK, data);
     }
 

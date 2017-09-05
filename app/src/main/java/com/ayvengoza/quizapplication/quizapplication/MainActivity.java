@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int NO_ANSWER = 0;
     private static final int CORRECT_ANSWER = 1;
     private static final int WRONG_ANSWER = 2;
+    private static final int CHEAT_ANSWER = 3;
     private int mCurrentIndex;
     private int[] mAnswerStatus;
     private boolean mRestartModeOn;
-    private boolean mIsCheater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsCheater = false;
                 updateNextQuestion();
             }
         });
@@ -193,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
             if(data == null){
                 return;
             }
-            mIsCheater = CheatActivity.wasAnswerShown(data);
+            if(CheatActivity.wasAnswerShown(data)) {
+                if(mAnswerStatus[mCurrentIndex] == NO_ANSWER) {
+                    mAnswerStatus[mCurrentIndex] = CHEAT_ANSWER;
+                }
+            }
         }
     }
 
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressed){
         boolean answerTrue = mQuestions[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
-        if(mIsCheater){
+        if(mAnswerStatus[mCurrentIndex] == CHEAT_ANSWER){
             messageResId = R.string.jugment_toast;
         } else {
             if (userPressed == answerTrue) {
@@ -244,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case CORRECT_ANSWER:
             case WRONG_ANSWER:
+            case CHEAT_ANSWER:
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
         }
