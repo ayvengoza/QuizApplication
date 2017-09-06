@@ -7,32 +7,52 @@
     android:layout_height="match_parent"
     tools:context="com.ayvengoza.quizapplication.quizapplication.CheatActivity">
 
-    <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="587dp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="587dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="@string/warning_text"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:text="@string/warning_text"/>
 
-        <TextView
-            android:id="@+id/answer_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="24dp"
-            tools:text="Answer"/>
+            <TextView
+                android:id="@+id/answer_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                tools:text="Answer"/>
 
-        <Button
-            android:id="@+id/show_answer_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_answer_button"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/show_answer_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_answer_button"/>
+
+            <TextView
+                android:id="@+id/version_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:text="Version"/>
+
+            <TextView
+                android:id="@+id/num_himts_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:text="Version"/>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
